@@ -4,7 +4,7 @@ library(ggplot2)
 library(reshape2)
 )
 
-Migration<- read.csv("Migration.csv", header=TRUE, stringsAsFactors=FALSE)
+Migration<- read.csv("Migration1950.csv", header=TRUE, stringsAsFactors=FALSE)
 PlaceCode<- read.csv("PlaceCode.csv", header=TRUE, stringsAsFactors=FALSE)
 colnames(Migration)[2]<-"Value"  # to use join function with PlaceCode data
 New_Migration <- left_join(Migration, PlaceCode, by = "Value")
@@ -23,10 +23,10 @@ top_five<- top[1:5,]
 # Grouping places other than "top five" into different regions 
 others <- mig_summary %>% anti_join(top_five, by= "BirthPlace") 
 others$BirthPlace <- with(others, 
-                          ifelse(BirthPlace %in% c("California","Oregon","Washington","Arizona","Colorado","Idaho","Montana","New Mexico","Nevada","Utah","Wyoming"), "West", 
+                          ifelse(BirthPlace %in% c("California","Oregon","Washington","Alaska","Arizona","Colorado","Idaho","Montana","New Mexico","Nevada","Utah","Wyoming"), "West", 
                                  ifelse(BirthPlace %in% c("Illinois","Iowa","Kansas","Missouri","Michigan","Minnesota","North Dakota","Nebraska","Ohio","Indiana","South Dakota","Wisconsin"), "MidWest", 
                                         ifelse(BirthPlace %in% c("Alabama","Arkansas","Delaware","Florida", "Georgia", "Kentucky","Louisiana", "Mississippi", "Maryland", "North Carolina",  "Oklahama", "South Carolina", "Texas", "Tennessee", "Virginia", "West Virginia"), "South",
-                                               ifelse(BirthPlace %in% c("Connecticut","Maine","Massachusetts", "New Hampshire", "New Jersey","New York", "Pennsylvania"   , "Rhode Island", "Vermont"), "Northeast",    "Other" )))))
+                                               ifelse(BirthPlace %in% c("Connecticut","Maine","Massachusetts", "New Hampshire", "New Jersey","New York", "Pennsylvania"   , "Rhode Island", "Vermont", "District of Columbia"), "Northeast",    "Other" )))))
 
 others<- others %>%
   group_by(YEAR, BirthPlace) %>%
@@ -61,6 +61,7 @@ ggplot(data= final)+ geom_area(aes(x= YEAR, y= percent, fill= BirthPlace), colou
   scale_fill_manual( values=rev(c("darkgrey", "gold","gold","firebrick", "gold",
                                   "plum", "lawngreen", "gold","skyblue2","grey")), name="Birth Place") +
   guides(fill = guide_legend(override.aes = list(colour = NULL), reverse =TRUE ))+
-  labs(title="Where people living in Oregon where born", y="Percent") +# xlab("test")+ ylab("test2")+
+  labs(title="Where people living in Oregon were born", y="Percent") +
+  scale_x_continuous(expand = c(0, 0),
+                     breaks = c(1950, 1960, 1970, 1980, 1990, 2000, 2012))+
   theme_custom
-
