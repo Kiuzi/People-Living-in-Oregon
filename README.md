@@ -1,4 +1,4 @@
-## Where People Living in Oregon where born
+## Where People Living in Oregon were Born
 Americans have moved between states since 1900. Current residents of Oregon State where born in different places:
 
 ![shot image](Oregon Residents.png?raw=true)
