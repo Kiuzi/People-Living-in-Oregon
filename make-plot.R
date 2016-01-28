@@ -10,7 +10,7 @@ colnames(Migration)[2]<-"Value"  # to use join function with PlaceCode data
 New_Migration <- left_join(Migration, PlaceCode, by = "Value")
 names(New_Migration)[5]<-"BirthPlace"
 
-# c=Count the number moving from each place each year
+# Count the number moving from each place each year
 mig_summary <- New_Migration %>% group_by(BirthPlace, YEAR) %>% summarise(n = n())
 
 # Top five places that makes the highest number of moves to Oregon
