@@ -19,7 +19,7 @@ total <- mig_summary %>%
   summarise(total = sum(n))
 top<- total[order(total$total, decreasing=TRUE),]
 top_five<- top[1:5,]
-head(top_five,7)
+
 # Grouping places other than "top five" into different regions 
 others <- mig_summary %>% anti_join(top_five, by= "BirthPlace") 
 others$BirthPlace <- with(others, 
