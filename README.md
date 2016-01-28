@@ -3,4 +3,5 @@ Americans have moved between states since 1900. Current residents of Oregon Stat
 
 ![shot image](Oregon Residents.png?raw=true)
 from: http://www.nytimes.com/interactive/2014/08/13/upshot/where-people-in-each-state-were-born.html#Idaho
+
 using data from: https://usa.ipums.org/usa/
