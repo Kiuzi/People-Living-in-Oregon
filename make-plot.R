@@ -26,7 +26,7 @@ others$BirthPlace <- with(others,
                           ifelse(BirthPlace %in% c("California","Oregon","Washington","Alaska","Arizona","Colorado","Idaho","Montana","New Mexico","Nevada","Utah","Wyoming"), "West", 
                                  ifelse(BirthPlace %in% c("Illinois","Iowa","Kansas","Missouri","Michigan","Minnesota","North Dakota","Nebraska","Ohio","Indiana","South Dakota","Wisconsin"), "MidWest", 
                                         ifelse(BirthPlace %in% c("Alabama","Arkansas","Delaware","Florida", "Georgia", "Kentucky","Louisiana", "Mississippi", "Maryland", "North Carolina",  "Oklahama", "South Carolina", "Texas", "Tennessee", "Virginia", "West Virginia"), "South",
-                                               ifelse(BirthPlace %in% c("Connecticut","Maine","Massachusetts", "New Hampshire", "New Jersey","New York", "Pennsylvania"   , "Rhode Island", "Vermont", "District of Columbia"), "Northeast",    "Other" )))))
+                                               ifelse(BirthPlace %in% c("Connecticut","Maine","Massachusetts", "New Hampshire", "New Jersey","New York", "Pennsylvania"   , "Rhode Island", "Vermont", "District of Columbia"), "Northeast",    "Outside the U.S." )))))
 
 others<- others %>%
   group_by(YEAR, BirthPlace) %>%
@@ -42,7 +42,7 @@ final<- left_join(full,total_moves_year, by="YEAR")
 final$percent<- (final$n/final$total)*100
 
 # Making the order of places similar to original plot
-final$BirthPlace <- factor(final$BirthPlace, levels=c("Other","MidWest", "West","South","Northeast","Idaho","Mexico","Washington","California", "Oregon"))
+final$BirthPlace <- factor(final$BirthPlace, levels=c("Outside the U.S.","MidWest", "West","South","Northeast","Idaho","Mexico","Washington","California", "Oregon"))
 final<- final[order(final$BirthPlace),] # order the BirthPlace variables according to the original plot
 
 # Making the plot
